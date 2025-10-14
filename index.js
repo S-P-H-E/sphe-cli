@@ -20,14 +20,16 @@ async function main() {
     console.log("To view your project run:")
     switch(projectType) {
         case "Expo":
-            console.log(chalk.yellow(`
-                npx expo start
-            `))
+            console.log("")
+            {targetDir != "." && console.log(chalk.yellow(`\tcd ${targetDir}`))}
+            console.log(chalk.yellow("\tnpx expo start"))
+            console.log("")
             break
         case "Node":
-            console.log(chalk.yellow(`
-                npm run dev
-            `))
+            console.log("")
+            {targetDir != "." && console.log(chalk.yellow(`\tcd ${targetDir}`))}
+            console.log(chalk.yellow("\tnpm run dev"))
+            console.log("")
             break
     }
 }
