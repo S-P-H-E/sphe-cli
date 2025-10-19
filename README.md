@@ -17,6 +17,7 @@ npm run dev
 The current supported project templates are:
 - Expo
 - Node
+- Nuxt
 
 ---
 Created and managed by Sphe.

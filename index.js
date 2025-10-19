@@ -31,6 +31,12 @@ async function main() {
             console.log(chalk.yellow("\tnpm run dev"))
             console.log("")
             break
+        case "Nuxt":
+            console.log("")
+            {targetDir != "." && console.log(chalk.yellow(`\tcd ${targetDir}`))}
+            console.log(chalk.yellow("\tnpm run dev"))
+            console.log("")
+            break
     }
 }
 await main()
