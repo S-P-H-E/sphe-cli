@@ -4,14 +4,17 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  css: ['~/globals.css'],
+  modules: ['@nuxt/image'],
 
+  // Styling
+  css: ['~/globals.css'],
   vite: {
     plugins: [
       tailwindcss(),
     ],
   },
 
+  // Metadata
   app: {
     head: {
       title: 'Nuxt',
@@ -26,6 +29,4 @@ export default defineNuxtConfig({
       ],
     },
   },
-
-  modules: ['@nuxt/icon', '@nuxt/image'],
 })
