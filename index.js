@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { Step1, Step2, Step3, Step4 } from './lib/steps.js'
+import { Step1, Step2, Step3, Step4, Step5 } from './lib/steps.js'
 import chalk from 'chalk'
 
 async function main() {
@@ -15,7 +15,10 @@ async function main() {
     // Step 4: Install dependencies.
     await Step4(targetDir)
 
-    // Step 5: The final, success message.
+    // Step 5: Initialize git repository and create .gitignore.
+    await Step5(targetDir)
+
+    // Step 6: The final, success message.
     console.log(chalk.green("\n🎉 Great! Your project has been created successfully! 🎉"))
     console.log("To view your project run:")
     switch(projectType) {
@@ -32,6 +35,12 @@ async function main() {
             console.log("")
             break
         case "Nuxt":
+            console.log("")
+            {targetDir != "." && console.log(chalk.yellow(`\tcd ${targetDir}`))}
+            console.log(chalk.yellow("\tnpm run dev"))
+            console.log("")
+            break
+        case "Waku":
             console.log("")
             {targetDir != "." && console.log(chalk.yellow(`\tcd ${targetDir}`))}
             console.log(chalk.yellow("\tnpm run dev"))
