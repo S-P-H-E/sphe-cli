@@ -1,6 +1,6 @@
 {
   "name": "sphe-cli",
-  "version": "1.0.39",
+  "version": "1.0.42",
   "description": "My personal project scaffolding CLI",
   "main": "src/index.ts",
   "type": "module",
@@ -14,6 +14,7 @@
   },
   "files": [
     "dist",
+    "assets",
     "README.md"
   ],
   "keywords": [

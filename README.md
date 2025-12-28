@@ -8,7 +8,7 @@ npx sphe-cli
 
 To clone and run the cli, run:
 ```
-git clone https://github.com/S-P-H-E/sphe-cli.git
+git clone https://github.com/S-P-H-E/sphe-cli.git .
 npm install
 
 npm run dev
@@ -16,6 +16,8 @@ npm run dev
 
 The current supported project templates are:
 - Next JS
+- Nuxt
+- Svelte
 - Node
 
 ---

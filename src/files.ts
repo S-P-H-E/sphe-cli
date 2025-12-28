@@ -50,16 +50,8 @@ coverage/
 # Misc
 *.tsbuildinfo`
 
-export const readmeCode = `# ${dirName}
+export const readmeCode = `# ${dirName.charAt(0).toUpperCase() + dirName.slice(1)}
 This is an empty project.`
-
-export const nextPageCode = `export default function Page() {
-  return (
-    <div>
-      <h1>Hello World!</h1>
-    </div>
-  )
-}`
 
 export const globalsCss = `@import "tailwindcss";
 
@@ -73,32 +65,70 @@ body {
     color: var(--foreground);
 }`
 
-export const nodeIndex = `import "dotenv/config"
+// Next JS
+export const nextPageCode = `export default function Home() {
+  return (
+    <div>
+      <h1>Hello World!</h1>
+    </div>
+  )
+}`
 
+// Node
+export const nodeIndex = `
 console.log("Hello World!");`
 
 export const nodePackage = `{
   "name": "${dirName}",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tsx index.ts"
+    "dev": "tsx index.mts"
   },
-  "dependencies": {},
-  "devDependencies": {
-    "@types/node": "^25.0.3",
-    "dotenv": "^17.2.3",
-    "tsx": "^4.21.0"
-  }
 }`
 
+// Nuxt 
 export const nuxtApp = `<script setup lang="ts">
-  // Typescript logic.
-  // Use "lucide-vue-next" for icons.
-  // And "<NuxtImg />" for images.
+  // typescript logic here
 </script>
 
 <template>
-  <div class="h-dvh flex justify-center items-center">
-    <h1 class="text-2xl font-semibold">Empty Nuxt project by Sphe.</h1>
-  </div>
+  <h1>Hello World!</h1>
 </template>`
+
+export const nuxtConfig = `import tailwindcss from "@tailwindcss/vite";
+
+export default defineNuxtConfig({
+  compatibilityDate: '0000-00-00',
+  devtools: { enabled: true },
+  css: ['./app/globals.css'],
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
+  app: {
+    head: {
+      title: 'Empty',
+      meta: [
+        { name: 'description', content: 'This is an empty project' },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      ],
+      htmlAttrs: {
+        lang: 'en',
+      },
+    },
+  },
+})`
+
+// Svelte
+export const sveltePage = `<div>
+  <h1>Hello World!</h1>
+</div>`
+
+export const svelteHead = `<svelte:head>
+	<title>Empty</title>
+	<meta name="description" content="This is an empty project" />
+	<link rel="icon" href={favicon} />
+</svelte:head>`
