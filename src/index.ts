@@ -50,7 +50,7 @@ async function main() {
 
         targetDir = dir.toString()
     }
-
+    
     // Step 2: Get package manager
     const { pkName, pkInstall } = getPackageManager();
 
@@ -129,24 +129,62 @@ async function main() {
 
             s.stop('Node Project created!');
           break;
-        case "expo":
-            s.start('Setting up Expo Project');
-            await execa`${pkInstall} create-nuxt@latest ${targetDir} --template=minimal --force --no-install --no-modules --gitInit=false --packageManager=${packageManager}`
+        // case "expo":
+        //     s.start('Setting up Expo Project');
+        //     await execa`${pkInstall} create-nuxt@latest ${targetDir} --template=minimal --force --no-install --no-modules --gitInit=false --packageManager=${packageManager}`
 
-            fs.writeFileSync(path.join(targetDir, 'app/app.vue'), nuxtApp)
-            fs.writeFileSync(path.join(targetDir, 'app/globals.css'), globalsCss)
+        //     fs.writeFileSync(path.join(targetDir, 'app/app.vue'), nuxtApp)
+        //     fs.writeFileSync(path.join(targetDir, 'app/globals.css'), globalsCss)
 
-            s.stop('Expo Project created!');
+        //     s.stop('Expo Project created!');
+        //   break;
+
+        case "svelte":
+            s.start('Setting up Svelte Project');
+            await execa(pkInstall, ['sv', 'create', '--template', 'minimal', '--types', 'ts', '--add', 'tailwindcss=plugins:none', '--no-install', targetDir], { stdio: 'ignore' })
+            
+            // Delete the .vscode folder
+            fs.rmSync(path.join(targetDir, '.vscode'), { recursive: true, force: true })
+
+            // Delete the static folder
+            fs.rmSync(path.join(targetDir, 'static'), { recursive: true, force: true })
+
+            // Delete the .npmrc file
+            fs.rmSync(path.join(targetDir, '.npmrc'), { force: true })
+
+            // Replace adapter '@sveltejs/adapter-auto'
+            if (packageManager == 'bun') {
+                const svelteConfigPath = path.join(targetDir, 'svelte.config.js')
+                fs.writeFileSync(svelteConfigPath, fs.readFileSync(svelteConfigPath, 'utf-8').replace("'@sveltejs/adapter-auto'", "'svelte-adapter-bun'"))
+            }
+
+            // fs.writeFileSync(path.join(targetDir, 'app/app.vue'), nuxtApp)
+            // fs.writeFileSync(path.join(targetDir, 'app/globals.css'), globalsCss)
+
+            fs.writeFileSync(path.join(targetDir, 'README.md'), readmeCode)
+
+            s.stop('Svelte Project created!');
           break;
     }
 
     // Step 6 & 7: Install dependencies & initialize git
     s.start(`Installing dependencies`);
+    
     await execa(packageManager.toString(), ['install'], {
         cwd: targetDir,
         stdio: ["ignore", "ignore", "pipe"],
         windowsHide: true,
     })
+
+    // Add bun adapter if using bun & svelte
+    if (packageManager === 'bun' && projectType === 'svelte') {
+        await execa('bun', ['add', '-D', 'svelte-adapter-bun'], {
+            cwd: targetDir,
+            stdio: ["ignore", "ignore", "pipe"],
+            windowsHide: true,
+        })
+    }
+
     s.stop(`Installed via ${packageManager}`);
 
     if (git) {
@@ -157,7 +195,10 @@ async function main() {
 		    windowsHide: true,
         })
 
-        fs.writeFileSync(path.resolve(targetDir, ".gitignore"), gitignore)
+        const gitignorePath = path.resolve(targetDir, ".gitignore");
+        if (!fs.existsSync(gitignorePath)) {
+            fs.writeFileSync(gitignorePath, gitignore);
+        }
 
         await execa("git", ["add", "."], {
             cwd: path.resolve(targetDir),
@@ -179,7 +220,11 @@ async function main() {
     console.log("To view your project run:")
     console.log("")
     {targetDir != "." && console.log(chalk.yellow(`\tcd ${targetDir}`))}
-    console.log(chalk.yellow(`\t${packageManager} run dev`))
+    {packageManager=="npm" ? (
+        console.log(chalk.yellow(`\t${packageManager} run dev`))
+    ):(
+        console.log(chalk.yellow(`\t${packageManager} dev`))
+    )}
     console.log("")
 }
 
