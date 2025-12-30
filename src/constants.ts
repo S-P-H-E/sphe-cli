@@ -7,5 +7,6 @@ export const SUPPORTED_PROJECTS = [
 
 export const SUPPORTED_PACKAGES = [
   { pkName: 'npm', pkInstall: 'npx' },
+  { pkName: 'pnpm', pkInstall: 'pnpx' },
   { pkName: 'bun', pkInstall: 'bunx' },
 ] as const
