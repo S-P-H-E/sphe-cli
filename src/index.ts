@@ -214,7 +214,7 @@ async function main() {
 
     // Add dev dependencies if using node
     if (projectType === 'node') {
-        await execa(packageManager.toString(), ['install', '-D', '@types/node', 'dotenv', 'tsx'], { cwd: targetDir, stdio: ["ignore", "ignore", "pipe"], windowsHide: true })
+        await execa(packageManager.toString(), ['install', '-D', '@types/node', 'dotenv', 'tsx', 'typescript'], { cwd: targetDir, stdio: ["ignore", "ignore", "pipe"], windowsHide: true })
     }
 
     // Add bun adapter if using bun & svelte

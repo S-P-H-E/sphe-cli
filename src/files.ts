@@ -84,6 +84,8 @@ export const nodePackage = `{
   "scripts": {
     "dev": "tsx index.mts"
   },
+  "dependencies": {},
+  "devDependencies": {}
 }`
 
 // Nuxt 
