@@ -8,6 +8,7 @@
   "bin": {
     "sphe-cli": "./dist/index.js"
   },
+  "private": false,
   "scripts": {
     "dev": "tsx src/index.ts",
     "test": "vitest run",
