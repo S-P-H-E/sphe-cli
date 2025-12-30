@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-import { spinner, isCancel, cancel, text, select, confirm, group } from '@clack/prompts';
-import fs from 'fs'
+import { isCancel, cancel, text, select, confirm, group } from '@clack/prompts';
 import path from 'path'
 import chalk from 'chalk';
 import { initializeGit, installDependencies, setupNext, setupNode, setupNuxt, setupSvelte } from './setup';
@@ -13,9 +12,9 @@ const SUPPORTED_PROJECTS = [
 ] as const
   
 const SUPPORTED_PACKAGES = [
-{ pkName: 'npm', pkInstall: 'npx' },
-{ pkName: 'pnpm', pkInstall: 'pnpx' },
-{ pkName: 'bun', pkInstall: 'bunx' },
+    { pkName: 'npm', pkInstall: 'npx' },
+    { pkName: 'pnpm', pkInstall: 'pnpx' },
+    { pkName: 'bun', pkInstall: 'bunx' },
 ] as const
 
 const SUPPORTED_CATEGORIES = [...new Set(SUPPORTED_PROJECTS.map(p => p.category))]
