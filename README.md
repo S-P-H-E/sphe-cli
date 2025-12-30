@@ -14,11 +14,16 @@ npm install
 npm run dev
 ```
 
-The current supported project templates are:
+Supported Project Templates:
 - Next JS
 - Nuxt
 - Svelte
 - Node
+
+Supported Package Managers:
+- Npm
+- Pnpm
+- Bun
 
 ---
 Created and managed by Sphe.
