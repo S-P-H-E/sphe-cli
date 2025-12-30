@@ -1,5 +1,5 @@
 # The Sphe CLI
-This command line tool is used to quickly generated Typescript projects.
+This command line tool is used to quickly generate empty Typescript projects.
 
 To use the cli, run:
 ```
