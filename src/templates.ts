@@ -1,7 +1,3 @@
-import { getDirectory } from ".";
-
-const { dirName } = getDirectory();
-
 export const gitignore = `# Dependencies
 node_modules/
 
@@ -50,7 +46,7 @@ coverage/
 # Misc
 *.tsbuildinfo`
 
-export const readmeCode = `# ${dirName.charAt(0).toUpperCase() + dirName.slice(1)}
+export const getReadmeCode = (dirName: string) => `# ${dirName.charAt(0).toUpperCase() + dirName.slice(1)}
 This is an empty project.`
 
 export const globalsCss = `@import "tailwindcss";
@@ -78,7 +74,7 @@ export const nextPageCode = `export default function Home() {
 export const nodeIndex = `
 console.log("Hello World!");`
 
-export const nodePackage = `{
+export const getNodePackage = (dirName: string) => `{
   "name": "${dirName}",
   "version": "1.0.0",
   "scripts": {
