@@ -1,5 +1,11 @@
 # sphe-cli
 
+## 1.1.2
+
+### Patch Changes
+
+- b8ba9ff: Added some target directory validation
+
 ## 1.1.1
 
 ### Patch Changes
