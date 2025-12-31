@@ -21,6 +21,10 @@ const SUPPORTED_CATEGORIES = [...new Set(SUPPORTED_PROJECTS.map(p => p.category)
 type Package = (typeof SUPPORTED_PACKAGES)[number]
 
 function validateProjectName(value: string) {
+    if (value === '.') {
+        return // Allow current directory
+    }
+    
     if (/\s/.test(value)) {
       throw new Error('Spaces are not allowed in the project name')
     }
