@@ -20,6 +20,18 @@ const SUPPORTED_PACKAGES = [
 const SUPPORTED_CATEGORIES = [...new Set(SUPPORTED_PROJECTS.map(p => p.category))]
 type Package = (typeof SUPPORTED_PACKAGES)[number]
 
+function validateProjectName(value: string) {
+    if (/\s/.test(value)) {
+      throw new Error('Spaces are not allowed in the project name')
+    }
+
+    if (!/^[a-z][a-z0-9-]*$/.test(value)) {
+        throw new Error(
+            'Project name must start with a letter and contain only lowercase letters, numbers, and dashes'
+        )
+    }
+}
+
 export function getDirectory() {
     let targetDir = process.argv[2];
     let dirName = targetDir === "." ? path.basename(process.cwd()) : path.basename(path.resolve(targetDir))
@@ -43,14 +55,19 @@ async function main() {
     // Step 1: Get project name
     let { targetDir, dirName } = getDirectory();
 
-    if (!targetDir) {
+    if (targetDir) {
+        validateProjectName(targetDir)
+    } else {
         const dir = await text({
             message: "Enter your project name:",
             placeholder: ".",
             defaultValue: ".",
             validate(value) {
-                // if (value.length === 0) return `Project name is required!`;
-                if (/\s/.test(value)) return `Spaces are not allowed in the project name!`;
+                try {
+                    validateProjectName(value)
+                } catch (e) {
+                    return (e as Error).message
+                }
             }
         })
 
@@ -139,4 +156,11 @@ async function main() {
     console.log("")
 }
 
-main()
+export async function run() {
+    await main()
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+    run()
+}
+  
