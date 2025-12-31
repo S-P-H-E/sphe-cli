@@ -1,6 +1,6 @@
 {
   "name": "sphe-cli",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "My personal project scaffolding CLI.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
