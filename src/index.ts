@@ -156,11 +156,4 @@ async function main() {
     console.log("")
 }
 
-export async function run() {
-    await main()
-}
-
-if (import.meta.url === `file://${process.argv[1]}`) {
-    run()
-}
-  
+main();
