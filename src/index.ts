@@ -56,7 +56,12 @@ async function main() {
     let { targetDir, dirName } = getDirectory();
 
     if (targetDir) {
-        validateProjectName(targetDir)
+        try {
+            validateProjectName(targetDir)
+        } catch (e) {
+            console.error(chalk.red((e as Error).message))
+            process.exit(1)
+        }
     } else {
         const dir = await text({
             message: "Enter your project name:",
