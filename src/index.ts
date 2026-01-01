@@ -22,7 +22,7 @@ async function main() {
     ):(
         console.log(chalk.yellow(`\t${packageManager} dev`))
     )}
-    console.log("")
+    console.log("");
 }
 
 main();
