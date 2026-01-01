@@ -1,9 +1,7 @@
-import { describe, expect, it } from "vitest"
+import { describe, it, expect } from 'vitest'
 
-// ! I need to work on this
-
-describe("Svelte Scaffold", () => {
-  it("Should complete without error", () => {
+describe("Mock Test", () => {
+  it("Should pass", async () => {
     expect(1).toBe(1)
   })
 })
