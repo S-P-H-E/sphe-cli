@@ -38,7 +38,6 @@ function getPackageManager(): Package {
 
 export async function Step1() {
   let targetDir = program.args[0]
-  let dirName = targetDir === '.' ? path.basename(process.cwd()) : path.basename(path.resolve(targetDir))
   let options = program.opts()
   let project = options.project as ProjectType || false
 
@@ -57,9 +56,8 @@ export async function Step1() {
     targetDir = dir.toString()
   }
 
+  const dirName = targetDir === '.' ? path.basename(process.cwd()) : path.basename(path.resolve(targetDir))
   const { pkName, pkInstall } = getPackageManager();
-
-  console.log(`${targetDir}, ${dirName}, ${project}`)
 
   return { targetDir, dirName, project, pkName, pkInstall }
 }
